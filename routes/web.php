@@ -24,7 +24,11 @@ Route::get('/', function () {
     // return view('kadr.index');
 })->name('/');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/competentions', [App\Http\Controllers\CompetentionsController::class, 'index'])->name('competentions');
+Route::any('/competentions', [App\Http\Controllers\CompetentionsController::class, 'index'])->name('competentions');
+Route::any('/competentions/addusercomp', [App\Http\Controllers\CompetentionsController::class, 'addusercomp'])->name('addusercomp');
+Route::any('/competentions/resume', [App\Http\Controllers\CompetentionsController::class, 'getresume'])->name('getresume');
+Route::any('/resume', [App\Http\Controllers\CompetentionsController::class, 'resume'])->name('resume');
+Route::any('/cyk', [App\Http\Controllers\CompetentionsController::class, 'cyk'])->name('cyk');
 // Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
 
 Route::prefix('profile')->group(function () {
@@ -33,15 +37,18 @@ Route::prefix('profile')->group(function () {
     Route::get('requests', 'App\Http\Controllers\User\ProfileController@requests')->name('profile.requests');
     Route::get('activities', 'App\Http\Controllers\User\ProfileController@activities')->name('profile.activities');
     Route::get('help', 'App\Http\Controllers\User\ProfileController@help')->name('profile.help');
+    Route::get('competentions', 'App\Http\Controllers\User\ProfileController@competentions')->name('profile.competentions');
+    Route::get('resume', 'App\Http\Controllers\User\ProfileController@resume')->name('profile.resume');
+    Route::get('sled', 'App\Http\Controllers\User\ProfileController@help')->name('profile.sled');
 });
 
 Route::prefix('platform')->group(function () {
     Route::get('{course_id}', 'App\Http\Controllers\User\PlatformController@index')->name('platform');
     Route::get('{course_id}/{module_id}', 'App\Http\Controllers\User\PlatformController@module')->name('platform.module');
     Route::get('{course_id}/{module_id}/{lesson_id}', 'App\Http\Controllers\User\PlatformController@lesson')->name('platform.lesson');
-    Route::get('{course_id}/{module_id}/{lesson_id}/{practice_id}', 'App\Http\Controllers\User\PlatformController@practice')->name('platform.practice'); 
-    Route::post('{course_id}/{module_id}/{lesson_id}/{practice_id}/save', 'App\Http\Controllers\User\PlatformController@practicesave')->name('platform.practicesave'); 
-    Route::post('{course_id}/{module_id}/{lesson_id}/save', 'App\Http\Controllers\User\PlatformController@lessonsave')->name('platform.lessonsave'); 
+    Route::get('{course_id}/{module_id}/{lesson_id}/{practice_id}', 'App\Http\Controllers\User\PlatformController@practice')->name('platform.practice');
+    Route::post('{course_id}/{module_id}/{lesson_id}/{practice_id}/save', 'App\Http\Controllers\User\PlatformController@practicesave')->name('platform.practicesave');
+    Route::post('{course_id}/{module_id}/{lesson_id}/save', 'App\Http\Controllers\User\PlatformController@lessonsave')->name('platform.lessonsave');
 });
 
 Route::prefix('request')->group(function () {
@@ -54,12 +61,6 @@ Route::prefix('activity')->group(function () {
     Route::get('/profile/{uniq}', 'App\Http\Controllers\Activity\RequestController@lk')->name('activity.lk');
 });
 
-Route::prefix('kadr')->group(function () {
-    Route::get('/', 'App\Http\Controllers\KadrController@index')->name('kadr.index')->middleware('guest');
-    Route::get('/competentions', 'App\Http\Controllers\KadrController@competentions')->name('kadr.competentions')->middleware('auth');
-    Route::get('/competentions/list', 'App\Http\Controllers\KadrController@competentionslist')->name('kadr.competentionslist')->middleware('auth');
-});
-
 Route::prefix('course')->group(function () {
     Route::get('/', 'App\Http\Controllers\CourseController@list')->name('course.list');
     Route::get('{course_id}/page', 'App\Http\Controllers\CourseController@index')->name('course.page');
@@ -69,7 +70,7 @@ Route::prefix('course')->group(function () {
 });
 
 Route::get('give-role-user', function (){
-    $user = App\User::find(2); 
+    $user = App\User::find(2);
     if(! $user->hasRole('super-admin')) {
         $user->assignRole('super-admin');
     }

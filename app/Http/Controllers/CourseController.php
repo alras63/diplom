@@ -47,50 +47,27 @@ class CourseController extends Controller
         $course_id = $request->course_id;
         $course = Courses::where('id', $course_id)->first();
         $user = Auth::user();
-  
- 
-        
+
+
+
 
         if(!isset($course)) {
             throw new NotFoundHttpException("Такого курса не существует. Если считаете, что это ошибка — обратитесь в поддержку");
         }
 
         $polya = json_decode($course->polya);
-    
+
         $polya_list = [];
         if(isset($polya)) {
             foreach($polya as $pole) {
 
                 array_push($polya_list, Polya::where('id', $pole)->first());
-            } 
+            }
         }
 
         return view('course.order', ['course' => $course, 'user' => $user, 'polya_list' => $polya_list]);
     }
 
-    public function filter(Request $request) {
-        foreach($request->input('block') as $block) {
-            $competentions_block[] = \App\CompetentionsBlock::where('id', $block)->first();
-        }
-
-        foreach($competentions_block as $comp) {
-            foreach($comp->courses as $course) {
-                $courses[] = $course;
-            }
-            
-        }
-
-        $competentions = CompetentionD::all();
-        $competentionsBlock = CompetentionsBlock::all();
-        if(isset($courses)) {
-            return view('competentions', ['competentions' => $competentions, 'competentionsBlock' => $competentionsBlock, 'courses'=>$courses]);
-
-        }   
-        
-        return redirect()->back();
-        // return $courses;
-
-    }
 
     public function newInsertCourse(Request $request) {
         $input = $request->all();
@@ -106,7 +83,7 @@ class CourseController extends Controller
             'course_id' => $course_id,
             'user_id' => $user_id
         ]);
-       
+
         if(!empty($courseOrder)) {
             $moreUsers = ['dopobr@samgk.ru'];
             Mail::to('aleksey171002@gmail.com')->cc($moreUsers)->send(new NewOrder($courseOrder));

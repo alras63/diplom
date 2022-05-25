@@ -8,6 +8,7 @@ use App\Models\ActivityOrder;
 use App\Models\Request as ModelsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -48,7 +49,7 @@ class ProfileController extends Controller
         //     $request = ModelsRequest::where('id', $request->id)->first();
         //     var_dump($request->course);
         // }
-       
+
         // $activities = Activities::all();
         // foreach($activities as $act) {
         //     $order = ActivityOrder::where("id", $act->id)->where("user_id", Auth::user()->id)->first();
@@ -62,5 +63,23 @@ class ProfileController extends Controller
         //     var_dump($request->course);
         // }
         return view('profile', ['activetab'=>'help']);
+    }
+    public function competentions()
+    {
+        // foreach (Auth::user()->requests as $index => $request) {
+        //     $request = ModelsRequest::where('id', $request->id)->first();
+        //     var_dump($request->course);
+        // }
+        $userid = Auth::id();
+        $compUser =  DB::table('user_competentions')->select()->where(['user_id' => $userid])->get();
+        return view('profile', ['activetab'=>'competentions', 'user_id' => $userid, 'compUser' => $compUser]);
+    }
+    public function resume()
+    {
+        // foreach (Auth::user()->requests as $index => $request) {
+        //     $request = ModelsRequest::where('id', $request->id)->first();
+        //     var_dump($request->course);
+        // }
+        return view('profile', ['activetab'=>'resume']);
     }
 }

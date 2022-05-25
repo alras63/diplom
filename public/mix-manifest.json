@@ -15,6 +15,8 @@
     "/images/act-static.png": "/images/act-static.png",
     "/images/admgub.png": "/images/admgub.png",
     "/images/arrow.svg": "/images/arrow.svg",
+    "/images/bgobl.png": "/images/bgobl.png",
+    "/images/compass.png": "/images/compass.png",
     "/images/course-static.png": "/images/course-static.png",
     "/images/depkadr.png": "/images/depkadr.png",
     "/images/image-block.png": "/images/image-block.png",
@@ -22,6 +24,10 @@
     "/images/my_kadr_logo.svg": "/images/my_kadr_logo.svg",
     "/images/obch_ph.png": "/images/obch_ph.png",
     "/images/plus.svg": "/images/plus.svg",
+    "/images/resume.docx": "/images/resume.docx",
+    "/images/rocket-bg.png": "/images/rocket-bg.png",
+    "/images/shield.png": "/images/shield.png",
+    "/images/stud.png": "/images/stud.png",
     "/images/tavolga.png": "/images/tavolga.png",
     "/images/webinar-static.png": "/images/webinar-static.png"
 }

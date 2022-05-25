@@ -1,5 +1,7 @@
 <?php
+
 use Illuminate\Support\Facades\Storage;
+
 ?>
 
 @extends('layouts.app')
@@ -47,21 +49,22 @@ use Illuminate\Support\Facades\Storage;
                                             <div class="buttons">
                                                 @php
                                                     if(isset($lessonfc) && $lessonfc !== null) { @endphp
-                                                    <a href="{{ route('platform.lesson', ['course_id' => $course->id, 'module_id' => $module->id, 'lesson_id' => $lesson->id]) }}"
-                                                    class="btr_r_b @if (!isset($type) && $lesson->id == $lessonfc->id) active @endif"
-                                                    style="text-align: center">Лекция</a>
-                                                    @php
+                                                <a href="{{ route('platform.lesson', ['course_id' => $course->id, 'module_id' => $module->id, 'lesson_id' => $lesson->id]) }}"
+                                                   class="btr_r_b @if (!isset($type) && $lesson->id == $lessonfc->id) active @endif"
+                                                   style="text-align: center">Лекция</a>
+                                                @php
                                                     } else { @endphp
-                                                        <a href="{{ route('platform.lesson', ['course_id' => $course->id, 'module_id' => $module->id, 'lesson_id' => $lesson->id]) }}"
-                                                    class="btr_r_b"
-                                                    style="text-align: center">Лекция</a>
-                                                    @php
-                                                }
+                                                <a href="{{ route('platform.lesson', ['course_id' => $course->id, 'module_id' => $module->id, 'lesson_id' => $lesson->id]) }}"
+                                                   class="btr_r_b"
+                                                   style="text-align: center">Лекция</a>
+                                                @php
+                                                    }
                                                 @endphp
-                                                
+
                                                 @foreach ($lesson->practices as $prct)
                                                     <a href="{{ route('platform.practice', ['course_id' => $course->id, 'module_id' => $module->id, 'lesson_id' => $lesson->id, 'practice_id' => $prct->id]) }}"
-                                                        class="btr_r_b @if (isset($type) && $type == 'practice') active @endif" style=" text-align:
+                                                       class="btr_r_b @if (isset($type) && $type == 'practice') active @endif"
+                                                       style=" text-align:
                                                         center">Практика</a>
 
                                                 @endforeach
@@ -92,16 +95,16 @@ use Illuminate\Support\Facades\Storage;
                                 <div class="lesson-content">
 
                                     @if (isset($lessonfc->content) && $lessonfc->content != '')
-                                                    <div class="card_alras">
-                                                            {!! $lessonfc->content->content !!}
-                                                    </div>
+                                        <div class="card_alras">
+                                            {!! $lessonfc->content->content !!}
+                                        </div>
                                     @endif
                                     @if (isset($lessonfc->content->link_pdf) && $lessonfc->content->link_pdf != '')
                                         @php
                                             $url = Storage::url($lessonfc->content->link_pdf);
                                         @endphp
                                         <iframe src="{{url($url)}}" width="100%"
-                                            class="pdfIframe"></iframe>
+                                                class="pdfIframe"></iframe>
                                     @endif
 
                                     <div class="buttons">
@@ -110,7 +113,7 @@ use Illuminate\Support\Facades\Storage;
                                             method="POST">
                                             {{ csrf_field() }}
                                             <input type="submit" value="Закончить лекцию" class="btn_r"
-                                                style="padding: 20px 50px">
+                                                   style="padding: 20px 50px">
                                         </form>
                                     </div>
 
