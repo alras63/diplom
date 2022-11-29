@@ -65,6 +65,7 @@ Route::prefix('course')->group(function () {
     Route::get('/', 'App\Http\Controllers\CourseController@list')->name('course.list');
     Route::get('{course_id}/page', 'App\Http\Controllers\CourseController@index')->name('course.page');
     Route::get('{course_id}/order', 'App\Http\Controllers\CourseController@order')->name('course.order');
+    Route::get('{course_id}/orderRegister', 'App\Http\Controllers\CourseController@orderRegister')->name('course.orderRegister');
     Route::post('newInsertCourse', 'App\Http\Controllers\CourseController@newInsertCourse')->name('course.newInsertCourse');
     Route::post('filter', 'App\Http\Controllers\CourseController@filter')->name('course.filter');
 });

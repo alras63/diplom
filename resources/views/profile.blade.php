@@ -27,17 +27,17 @@
                        class="btr_r_b @if (isset($activetab) && $activetab == 'requests') active @endif">Ваши заявки</a>
                     <a href="{{ route('profile.active') }}"
                        class="btr_r_b @if (!isset($activetab) || $activetab == '') active @endif">Активные курсы</a>
-                    <a href="{{ route('profile.competentions') }}"
-                       class="btr_r_b @if (isset($activetab) && $activetab == 'competentions') active @endif">Добавить
-                        свои компетенции</a>
-                    <a href="{{ route('profile.resume') }}"
-                       class="btr_r_b @if (isset($activetab) && $activetab == 'help') active @endif">Внести данные для
-                        резюме</a>
-                    <a href="{{ route('profile.sled') }}"
-                       class="btr_r_b @if (isset($activetab) && $activetab == 'help') active @endif">Загрузка грамот
-                        (#цифровойслед)</a>
-                    <a href="{{ route('competentions') }}"
-                       class="btr_r_b @if (isset($activetab) && $activetab == 'help') active @endif">Фильтр курсов</a>
+{{--                    <a href="{{ route('profile.competentions') }}"--}}
+{{--                       class="btr_r_b @if (isset($activetab) && $activetab == 'competentions') active @endif">Добавить--}}
+{{--                        свои компетенции</a>--}}
+{{--                    <a href="{{ route('profile.resume') }}"--}}
+{{--                       class="btr_r_b @if (isset($activetab) && $activetab == 'help') active @endif">Внести данные для--}}
+{{--                        резюме</a>--}}
+{{--                    <a href="{{ route('profile.sled') }}"--}}
+{{--                       class="btr_r_b @if (isset($activetab) && $activetab == 'help') active @endif">Загрузка грамот--}}
+{{--                        (#цифровойслед)</a>--}}
+{{--                    <a href="{{ route('competentions') }}"--}}
+{{--                       class="btr_r_b @if (isset($activetab) && $activetab == 'help') active @endif">Фильтр курсов</a>--}}
                     {{-- <a href="{{ route('profile.activities') }}" class="btr_r_b @if (isset($activetab) && $activetab == 'activities') active @endif">Мероприятия</a> --}}
                     {{-- <a href="{{ route('profile.help') }}" class="btr_r_b @if (isset($activetab) && $activetab == 'help') active @endif">Вопрос в поддержку</a> --}}
                     {{-- <a href="{{ route('kadr.competentions') }}" class="btr_r_b @if (isset($activetab) && $activetab == 'competentions') active @endif">Мои компетенции (матрица компетенций)</a> --}}

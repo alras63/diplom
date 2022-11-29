@@ -49,10 +49,10 @@ class Course extends Resource
     }
 
     /**
-    * Get the displayable singular label of the resource.
-    *
-    * @return  string
-    */
+     * Get the displayable singular label of the resource.
+     *
+     * @return  string
+     */
     public static function singularLabel()
     {
         return __('Course');
@@ -61,84 +61,83 @@ class Course extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function fields(Request $request)
     {
         return [
-                                                ID::make( __('Id'),  'id')
-->rules('required')
-->sortable()
-,
-                                                                Text::make( __('Title'),  'title')
-->sortable()
-,
+            ID::make(__('Id'), 'id')
+                ->rules('required')
+                ->sortable()
+            ,
+            Text::make(__('Title'), 'title')
+                ->sortable()
+            ,
 //                                                                 HasOne::make('Teacher')
 
 // ->sortable()
 // ,
-                                                                Text::make( __('Description'),  'description')->displayUsing(function ($name) {
-    return \Str::limit($name, 55);
-})
-->sortable()
-,
-                                                                Text::make( __('Dates'),  'dates')
-->sortable()
-,
-                                                                Text::make( __('Cost'),  'cost')
-->sortable()
-,
-                                                                File::make( __('Url'),  'url')
-->sortable()
-,
-                                                                                                                        Number::make( __('Sort'),  'sort')
-->sortable()
-,
+            Text::make(__('Description'), 'description')->displayUsing(function ($name) {
+                return \Str::limit($name, 55);
+            })
+                ->sortable()
+            ,
+            Text::make(__('Dates'), 'dates')
+                ->sortable()
+            ,
+            Text::make(__('Cost'), 'cost')
+                ->sortable()
+            ,
+            File::make(__('Url'), 'url')
+                ->sortable()
+            ,
+            Number::make(__('Sort'), 'sort')
+                ->sortable()
+            ,
 //                                                                 HasOne::make('ActivityNew')
 
 // ->sortable()
 // ,
-                                                                Number::make( __('Click Registration'),  'click_registration')
-->sortable()
-,
-                                                                Number::make( __('For Type'),  'for_type')
-->sortable()
-,
-                                                                Number::make( __('Closed'),  'closed')
-->sortable()
-,
-//                                                                 HasOne::make('User')
+            Number::make(__('Click Registration'), 'click_registration')
+                ->sortable()
+            ,
+            Number::make(__('For Type'), 'for_type')
+                ->sortable()
+            ,
+            Number::make(__('Closed'), 'closed')
+                ->sortable()
+            ,
+            HasMany::make('Modules')
+                ->sortable()
+            ,
+            HasMany::make('RequestR')
+                ->sortable()
+            ,
+            Text::make(__('Oborud'), 'oborud')
+                ->sortable()
+            ,
+            Text::make(__('Time'), 'time')
+                ->sortable()
+            ,
+            Text::make(__('Docs'), 'docs')
+                ->sortable()
+            ,
+            Multiselect::make('Polya', 'polya')
+                ->asyncResource(Polya::class)
+                ->placeholder('Выберите поля для регистрации'),
 
-// ->sortable()
-// ,
-HasMany::make('Modules')
+            Multiselect::make('blocks', 'blocks')
+                ->asyncResource(CompetentionsBlock::class)
+                ->placeholder('Выберите блок(-и)')
 
-->sortable()
-,
-HasMany::make('RequestR')
-
-->sortable()
-,
-                                                                Text::make( __('Oborud'),  'oborud')
-->sortable()
-,
-                                                                Text::make( __('Time'),  'time')
-->sortable()
-,
-                                                                Text::make( __('Docs'),  'docs')
-->sortable()
-,
-Multiselect::make('Polya', 'polya')
-        ->asyncResource(Polya::class)
-        ->placeholder('Выберите поля для регистрации')
-                                    ];
+        ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function cards(Request $request)
@@ -149,7 +148,7 @@ Multiselect::make('Polya', 'polya')
     /**
      * Get the filters available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function filters(Request $request)
@@ -160,7 +159,7 @@ Multiselect::make('Polya', 'polya')
     /**
      * Get the lenses available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function lenses(Request $request)
@@ -171,7 +170,7 @@ Multiselect::make('Polya', 'polya')
     /**
      * Get the actions available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function actions(Request $request)

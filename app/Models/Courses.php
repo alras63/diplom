@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\AsSource;
 use Laravel\Scout\Searchable;
+
 class Courses extends Model
 {
 
@@ -40,23 +41,28 @@ class Courses extends Model
 
     public function teacher()
     {
-        return $this->hasOne(Teachers::class, 'teacher_id', 'id' );
+        return $this->hasOne(Teachers::class, 'teacher_id', 'id');
     }
+
     public function modules()
     {
         return $this->hasMany(Modules::class, 'course_id', 'id');
     }
 
+    public function blocks()
+    {
+        return $this->hasMany(CoursesBlocks::class, 'course_id', 'id');
+    }
 
 
     public function countlessons()
     {
         $result = 0;
-    
 
-        if($this->modules != '') {
-            foreach($this->modules as $module) {
-               
+
+        if ($this->modules != '') {
+            foreach ($this->modules as $module) {
+
                 $countInModule = count($module->lessons);
                 $result += $countInModule;
             }
@@ -67,38 +73,40 @@ class Courses extends Model
     public function completelessons()
     {
         $result = 0;
-        
-      
-        if($this->modules != '') {
-            foreach($this->modules as $module) {
+
+
+        if ($this->modules != '') {
+            foreach ($this->modules as $module) {
                 $lessons = $module->lessons;
-                foreach($lessons as $lesson) {
+                foreach ($lessons as $lesson) {
                     $lessonComplete = $lesson->isComplete(Auth::user()->id);
-                    if($lessonComplete) {
+                    if ($lessonComplete) {
                         $result += 1;
 
                     }
                 }
-               
+
             }
         }
         return $result;
     }
 
-    public function lessonids() {
+    public function lessonids()
+    {
         $result = [];
-        if($this->modules) {
-            foreach($this->modules as $module) {
-                if($module->lessons) {
-                    foreach($module->lessons as $lesson) {
+        if ($this->modules) {
+            foreach ($this->modules as $module) {
+                if ($module->lessons) {
+                    foreach ($module->lessons as $lesson) {
                         array_push($result, $lesson->id);
                     }
                 }
-            } 
+            }
         }
 
         return $result;
     }
+
     public function searchableAs()
     {
         return 'courses';

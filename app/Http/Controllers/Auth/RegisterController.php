@@ -119,17 +119,16 @@ class RegisterController extends Controller
 
         $user = $this->create($data);
         if ($user) {
-            $moreUsers = ['dopobr@samgk.ru'];
+            $moreUsers = [];
             Mail::to('aleksey171002@gmail.com')->cc($moreUsers)->send(new NewUser($user));
 
-            Auth::login($user);
+            Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
-            return redirect()->intended('/')
-                ->withSuccess('Signed in');
+            return redirect()->intended('/');
 
 
         }
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect("login");
     }
 
     /**

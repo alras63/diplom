@@ -16,14 +16,17 @@
                                 {{ $course->description }}
                             </p>
 
-                          @auth
-                            <a href="/course/{{$course->id}}/order" class="btn btn_r"
-                                style="border-radius: 4px; min-height: 55px; background-color: #34A853; display: inline-flex; align-items: center; font-size: 18px; font-weight: 600; margin-left: 0">Записаться
-                                на курс</a>
+                            @auth
+                                <a href="/course/{{$course->id}}/order" class="btn btn_r"
+                                   style="border-radius: 4px; min-height: 55px; background-color: #34A853; display: inline-flex; align-items: center; font-size: 18px; font-weight: 600; margin-left: 0">Записаться
+                                    на курс</a>
                             @endauth
 
                             @guest
-                                <div style="font-size: 24px; margin-top: 20px">Для записи на курс, пройдите <a href="/register" style="color: blue">регистрацию</a>, а затем вернитесь на эту страницу</div>
+                                <a href="/course/{{$course->id}}/orderRegister" class="btn btn_r"
+                                   style="border-radius: 4px; min-height: 55px; background-color: #34A853; display: inline-flex; align-items: center; font-size: 18px; font-weight: 600; margin-left: 0">
+                                    Зарегистрироваться и записаться
+                                </a>
                             @endguest
                         </div>
                     </div>
@@ -244,7 +247,8 @@
                             ДОСТУП К ЛЕКЦИИ
                         </div>
                         <div class="description">
-                            Чтобы получить доступ к каждой следующей лекции, нужно пройти предыдущую и сдать практическую
+                            Чтобы получить доступ к каждой следующей лекции, нужно пройти предыдущую и сдать
+                            практическую
                             работу.
                             <br>
                             В лекциях – видеоматериалы, текст и презентации
@@ -288,7 +292,8 @@
                             ДОКУМЕНТ
                         </div>
                         <div class="description">
-                            После проверки вашей итоговой работы мы загружаем в личный кабинет или отправляем на электронную
+                            После проверки вашей итоговой работы мы загружаем в личный кабинет или отправляем на
+                            электронную
                             почту документ о прохождении курса
                         </div>
                     </div>

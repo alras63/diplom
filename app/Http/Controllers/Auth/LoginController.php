@@ -37,14 +37,19 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-   
+
         $credentials = $request->only('email', 'password');
-    
+
         $user = User::where('email', $credentials['email'])->first();
 
-        // var_dump($user->password); 
+        // var_dump($user->password);
         // var_dump(Hash::make($credentials['password']));
         // die();
+
+        if(!$user) {
+            return redirect()->intended('/login')
+                ->withErrors('Неверный логин или пароль!');
+        }
 
         if ($user->password == md5($credentials['password'])) {
             Auth::login($user);
@@ -55,7 +60,7 @@ class LoginController extends Controller
         //     return redirect()->intended('/')
         //                 ->withSuccess('Signed in');
         // }
-  
+
         return redirect("login")->withSuccess('Login details are not valid');
     }
     /**
