@@ -25,9 +25,12 @@
         "optimistdigital/nova-multiselect-field": "^2.3",
         "pdmfc/nova-action-button": "^0.7.4",
         "phpoffice/phpword": "^0.18.3",
-        "vyuldashev/nova-permission": "^3.0"
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "vyuldashev/nova-permission": "^3.0",
+        "westacks/telebot": "^2.2"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
