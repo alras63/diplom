@@ -67,9 +67,6 @@ class CourseController extends Controller
 
         $user = Auth::user();
 
-
-
-
         if(!isset($course)) {
             throw new NotFoundHttpException("Такого курса не существует. Если считаете, что это ошибка — обратитесь в поддержку");
         }
@@ -127,7 +124,7 @@ class CourseController extends Controller
         $request_polya	 = json_encode($input);
         $status = "Первично подана";
         $course_id = $input['course_id'];
-        if($request->isMethod('post')) {
+        if($request->isMethod('post') && Auth::guest()) {
             $credentials = $request->only('fio', 'email', 'tel', 'password');
 
             $f = explode(' ', $request->fio);

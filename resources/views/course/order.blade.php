@@ -21,8 +21,8 @@
                 <input type="text" name="phone" placeholder="Номер телефона" value="{{ isset($user)  ? $user->tel : '' }}" @if (isset($user->tel))
                 readonly
                 @endif class="form-control mt-2">
-                <input id="pass" type="password" @error('pass') is-invalid @enderror
-                name="pass" required autocomplete="pass" placeholder="Придумайте пароль">
+                @if(\Illuminate\Support\Facades\Auth::guest())<input id="pass" type="password" @error('pass') is-invalid @enderror
+                name="pass" required autocomplete="pass" placeholder="Придумайте пароль">@endif
 
                 @if (isset($polya_list))
 
