@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -69,6 +70,15 @@ class TgEvent extends Resource
 
             Text::make(__('Название'), 'name')
                 ->rules('required')
+                ->sortable(),
+
+        Text::make(__('Адрес'), 'address')
+                ->rules('required')
+                ->sortable()
+            ,
+        Boolean::make(__('Активный'), 'is_active')
+                ->rules('required')
+                ->default(1)
                 ->sortable()
             ,
         ];

@@ -30,16 +30,16 @@ class CityHandler extends CommandHandler
             $tgUser = TgUser::whereTgUserId($this->update->user()->id)->first();
 
             if (null !== $tgUser) {
-//                $tgUser->city = $this->update->message->text;
-//                $tgUser->register_step = 4;
-//
-//                $tgUser->save();
+                $tgUser->city = $this->update->message->text;
 
-                $text    = "Для выбора мероприятий отправьте команду /events";
-
-                $this->sendMessage([
-                    'text'                => $text,
-                ]);
+                if($tgUser->save()) {
+                    $text    = "Для выбора мероприятий отправьте команду /events";
+                    $tgUser->register_step = 4;
+                    $tgUser->save();
+                    $this->sendMessage([
+                        'text'                => $text,
+                    ]);
+                }
             }
         } catch (\Exception $e) {
             $this->sendMessage(['chat_id' => 344878981,

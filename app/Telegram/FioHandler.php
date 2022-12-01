@@ -34,13 +34,13 @@ class FioHandler extends CommandHandler
                 $tgUser->fio = $this->update->message->text;
                 $tgUser->register_step = 3;
 
-                $tgUser->save();
+                if($tgUser->save()) {
+                    $text    = "Напишите ваш город:";
 
-//                $text    = "Напишите ваш город:";
-//
-//                $this->sendMessage([
-//                    'text'                => $text,
-//                ]);
+                    $this->sendMessage([
+                        'text'                => $text,
+                    ]);
+                }
             }
 
 
