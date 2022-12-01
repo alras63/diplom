@@ -23,26 +23,43 @@ class EventsCommand extends CommandHandler
     {
         try {
 
-            $text = "Выбор доступных мероприятий (при нажатии на кнопку - произойдет запись): ";
+            $text = "Выбор доступных мероприятий (при нажатии на кнопку - произойдет запись, при повторной записи - предыдущая отменится!): \n";
 
             $events = PriemEvents::where('is_active', 1)->get();
+
+            foreach ($events as $index => $event) {
+                $num = $index+1;
+                $text .= "$num. $event->name \n";
+            }
 
             $tgUser = TgUser::whereTgUserId($this->update->user()->id)->first();
 
             if(isset($tgUser)) {
                 $buttons   = [ ];
 
-                foreach ($events as $event) {
-                    $buttons[] = [
-                        'text'          => $event->name,
+                $line = 0;
+                foreach ($events as $index=>$event) {
+                    if($index % 8 === 0) {
+                        $line += 1;
+                    }
+
+                    $buttons[$line][] = [
+                        'text'          => $index+1,
                         'callback_data' => '/request_event_' . $event->id
                     ];
                 }
 
+                $inlineKb = [];
+
+                foreach ($buttons as $line) {
+                    $inlineKb[] = $line;
+                }
+
+
                 $this->sendMessage([
                     'text'         => $text,
                     'reply_markup' => [
-                        'inline_keyboard' => [$buttons]
+                        'inline_keyboard' => $inlineKb
                     ]
                 ]);
             }

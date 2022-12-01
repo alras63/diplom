@@ -1,2 +1,6 @@
 *
 !.gitignore
+!qrs
+!qrs/*
+!error.png
+!true.png

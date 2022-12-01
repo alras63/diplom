@@ -30,10 +30,10 @@ class CityHandler extends CommandHandler
             $tgUser = TgUser::whereTgUserId($this->update->user()->id)->first();
 
             if (null !== $tgUser) {
-                $tgUser->city = $this->update->message->text;
-                $tgUser->register_step = 4;
-
-                $tgUser->save();
+//                $tgUser->city = $this->update->message->text;
+//                $tgUser->register_step = 4;
+//
+//                $tgUser->save();
 
                 $text    = "Для выбора мероприятий отправьте команду /events";
 

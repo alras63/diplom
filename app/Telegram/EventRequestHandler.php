@@ -2,6 +2,7 @@
 
 namespace App\Telegram;
 
+use App\Models\PriemEvents;
 use App\Models\PriemEventsRequests;
 use App\Models\TgUser;
 use Illuminate\Support\Facades\Storage;
@@ -33,12 +34,12 @@ class EventRequestHandler extends CommandHandler
             $parse = null;
             preg_match('/(\/request_event_)(\d+)/', $this->update->callback_query->data, $parse);
             $parseEventId  = $parse[2];
-
+            $event  = PriemEvents::whereId($parse[2])->first();
 
             if(isset($tgUser)) {
                 $eventRequest = PriemEventsRequests::where([
-                    'tg_user_id' => $tgUser->id,
-                    'priem_event_id' => $parseEventId
+                    'tg_user_id' => (int)$tgUser->id,
+                    'is_active' => 1,
                 ])->first();
 
                 if(null == $eventRequest) {
@@ -54,7 +55,7 @@ class EventRequestHandler extends CommandHandler
                     Storage::put('/public/qrs/' . $eventRequest->uniq . '.png', $image);
                     $path = env('APP_URL') .  "/storage/qrs/$eventRequest->uniq.png";
 
-                    $this->sendDocument([
+                    $this->sendMessage([
                         'text'         => "Вы успешно записались, покажите QR на входе, в день мероприятия",
                     ]);
 
@@ -63,18 +64,35 @@ class EventRequestHandler extends CommandHandler
 
                     ]);
                 } else {
-                    $this->sendMessage([
-                        'text'         => "Вы уже записаны на этой мероприятие",
-                    ]);
+                    if($eventRequest->id == $parseEventId) {
+                        $this->sendMessage([
+                            'text'         => "Вы выбрали тоже самое мероприятие!",
+                        ]);
+                    } else {
+                        $eventRequest->is_active = 0;
+                        $eventRequest->save();
 
-                    $image = QrCode::format('png')->size(500)->generate(env('APP_URL') . '/checkQR/' . $eventRequest->uniq);
-                    Storage::put('/public/qrs/' . $eventRequest->uniq . '.png', $image);
-                    $path = env('APP_URL') . "/storage/qrs/$eventRequest->uniq.png";
+                        $eventRequest = new PriemEventsRequests();
+                        $eventRequest->tg_user_id = $tgUser->id;
+                        $eventRequest->priem_event_id = $parseEventId;
+                        $eventRequest->uniq = Str::random(15);
 
-                    $this->sendPhoto([
-                        'photo' => Storage::path('/public/qrs/' . $eventRequest->uniq . '.png'),
+                        $eventRequest->save();
 
-                    ]);
+                        $image = QrCode::format('png')->size(500)->generate(env('APP_URL') . '/checkQR/' . $eventRequest->uniq);
+                        Storage::put('/public/qrs/' . $eventRequest->uniq . '.png', $image);
+
+                        $this->sendMessage([
+                            'text'         => "Вы успешно перезаписались, покажите QR на входе, в день мероприятия. АДРЕС: $event->address",
+                        ]);
+
+                        $this->sendPhoto([
+                            'photo' => Storage::path('/public/qrs/' . $eventRequest->uniq . '.png'),
+
+                        ]);
+                    }
+
+
                 }
             }
 

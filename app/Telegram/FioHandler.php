@@ -36,11 +36,11 @@ class FioHandler extends CommandHandler
 
                 $tgUser->save();
 
-                $text    = "Напишите ваш город:";
-
-                $this->sendMessage([
-                    'text'                => $text,
-                ]);
+//                $text    = "Напишите ваш город:";
+//
+//                $this->sendMessage([
+//                    'text'                => $text,
+//                ]);
             }
 
 
