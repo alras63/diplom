@@ -9,6 +9,7 @@ use App\Models\Request as ModelsRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -116,7 +117,7 @@ class CourseController extends Controller
 
         if ($validate->fails()) {
             if ($validate->fails()) {
-                return Response::json(['errors' => $validate->errors()], \Illuminate\Http\Response::HTTP_BAD_REQUEST);
+                return Redirect::back();
             }
         }
 
