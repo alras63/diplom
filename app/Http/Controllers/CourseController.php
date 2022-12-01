@@ -9,6 +9,8 @@ use App\Models\Request as ModelsRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Mail\NewOrder;
 use Illuminate\Support\Facades\Mail;
@@ -108,6 +110,17 @@ class CourseController extends Controller
 
 
     public function newInsertCourse(Request $request) {
+        $validate = Validator::make($request->all(), [
+            'email' => ['required', 'unique:users.email']
+        ]);
+
+        if ($validate->fails()) {
+            if ($validate->fails()) {
+                return Response::json(['errors' => $validate->errors()], \Illuminate\Http\Response::HTTP_BAD_REQUEST);
+            }
+        }
+
+        $validate = $validate->validated();
         $input = $request->all();
         $uniq_number = $input['_token'];
         $request_polya	 = json_encode($input);
@@ -184,34 +197,6 @@ class CourseController extends Controller
             $password .= $arr[random_int(0, count($arr) - 1)];
         }
         return $password;
-    }
-
-    public function registerUser(Request $request)
-    {
-
-        $credentials = $request->only('fio', 'email', 'tel', 'password');
-        $validated = $this->validator($credentials);
-        $errors = $validated->errors();
-        $vd = $validated->validated();
-
-        $f = explode(' ', $request->fio);
-
-        $username = strtolower($this->translit($f[0]) . '-' . abs(crc32(uniqid())));
-
-        $data = ['name' =>  $request->fio, 'username' => $username, "password" => $request->pass, "fio" => $request->fio,  "tel" => $request->tel,  "email" => $request->email];
-
-        $user = $this->createUser($data);
-        if ($user) {
-            $moreUsers = [];
-            Mail::to('aleksey171002@gmail.com')->cc($moreUsers)->send(new NewUser($user));
-
-            Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-
-            return redirect()->intended('/');
-
-
-        }
-        return redirect("login");
     }
 
     /**
