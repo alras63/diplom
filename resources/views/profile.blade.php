@@ -49,14 +49,14 @@
                         <div class="courses-list">
                             @if (isset(Auth::user()->requestss) || Auth::user()->requestss !== null)
                                 @foreach (Auth::user()->requestss as $request)
+                                    @if($request->course)
                                     <div class="course-item">
                                         <div>
                                             <div class="type">
                                                 Курс
                                             </div>
-
                                             <div class="title">
-                                                {{ $request->course->title }}
+                                                {{ $request->course?->title }}
                                             </div>
 
                                             <div class="stat">
@@ -66,12 +66,12 @@
                                                     <b>
                                                         Пройденные темы
                                                     </b>
-                                                    {{ $request->course->completelessons() }} из
-                                                    {{ $request->course->countlessons() }}
+                                                    {{ $request->course?->completelessons() }} из
+                                                    {{ $request->course?->countlessons() }}
 
                                                     <div class="progress">
                                                         <div class="active"
-                                                             style="width: {{ $request->course->countlessons() != 0 ? ($request->course->completelessons() / $request->course->countlessons()) * 100 . '%' : 100 . '%' }}">
+                                                             style="width: {{ $request->course?->countlessons() != 0 ? ($request->course?->completelessons() / $request->course?->countlessons()) * 100 . '%' : 100 . '%' }}">
 
                                                         </div>
                                                     </div>
@@ -80,7 +80,7 @@
                                             </div>
 
                                             <div class="buttons">
-                                                <a href="{{ route('platform', ['course_id' => $request->course->id]) }}"
+                                                <a href="{{ $request->course?->id ? route('platform', ['course_id' => $request->course?->id]) : '' }}"
                                                    class="btr_r_b active" style="text-align: center">Продолжить
                                                     прохождение
                                                     курса</a>
@@ -91,6 +91,7 @@
                                         </div>
 
                                     </div>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
@@ -127,7 +128,7 @@
                                             {{ $index + 1 }}
                                         </td>
                                         <td>
-                                            {{ $request->course->title }}
+                                            {{ $request->course?->title }}
                                         </td>
                                         <td>
                                             {{ $request->created_at }}
