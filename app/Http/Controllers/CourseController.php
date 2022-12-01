@@ -111,7 +111,7 @@ class CourseController extends Controller
 
     public function newInsertCourse(Request $request) {
         $validate = Validator::make($request->all(), [
-            'email' => ['required', 'unique:users.email']
+            'email' => ['required', 'unique:users']
         ]);
 
         if ($validate->fails()) {
