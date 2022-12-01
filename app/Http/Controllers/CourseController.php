@@ -128,6 +128,9 @@ class CourseController extends Controller
         $request_polya	 = json_encode($input);
         $status = "Первично подана";
         $course_id = $input['course_id'];
+
+        $user = NULL;
+
         if($request->isMethod('post') && Auth::guest()) {
             $credentials = $request->only('fio', 'email', 'tel', 'password');
 
