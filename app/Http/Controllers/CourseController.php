@@ -159,7 +159,7 @@ class CourseController extends Controller
         if(!empty($courseOrder)) {
             $moreUsers = [];
             Mail::to('aleksey171002@gmail.com')->cc($moreUsers)->send(new NewOrder($courseOrder));
-           return redirect("profile");
+           return redirect("profile/requests");
         }
     }
 
