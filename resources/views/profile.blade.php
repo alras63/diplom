@@ -49,7 +49,7 @@
                         <div class="courses-list">
                             @if (isset(\Illuminate\Support\Facades\Auth::user()->requestss) || \Illuminate\Support\Facades\Auth::user()->requestss !== null)
                                 @foreach (\Illuminate\Support\Facades\Auth::user()->requestss as $request)
-                                    @if($request->course && $request == "Одобрена или оплачена")
+                                    @if($request->course && $request->status == "Одобрена или оплачена")
                                     <div class="course-item">
                                         <div>
                                             <div class="type">
