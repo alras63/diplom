@@ -9,6 +9,7 @@ use App\Models\Request as ModelsRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Mail\NewOrder;
 use Illuminate\Support\Facades\Mail;
@@ -228,7 +229,7 @@ class CourseController extends Controller
             'name' => $data['username'],
             'email' => $data['email'],
             'tel' => $data['tel'],
-            'password' => md5($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
     }
 }

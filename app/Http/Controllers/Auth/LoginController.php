@@ -51,7 +51,7 @@ class LoginController extends Controller
                 ->withErrors('Неверный логин или пароль!');
         }
 
-        if ($user->password == md5($credentials['password'])) {
+        if ($user->password == Hash::check($credentials['password'], $user->password)) {
             Auth::login($user);
             return redirect()->intended('/')
             ->withSuccess('Signed in');
