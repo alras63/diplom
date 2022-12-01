@@ -47,9 +47,9 @@
                         <h3>Ваши активные курсы</h3>
 
                         <div class="courses-list">
-                            @if (isset(Auth::user()->requestss) || Auth::user()->requestss !== null)
-                                @foreach (Auth::user()->requestss as $request)
-                                    @if($request->course)
+                            @if (isset(\Illuminate\Support\Facades\Auth::user()->requestss) || \Illuminate\Support\Facades\Auth::user()->requestss !== null)
+                                @foreach (\Illuminate\Support\Facades\Auth::user()->requestss as $request)
+                                    @if($request->course && $request == "Одобрена или оплачена")
                                     <div class="course-item">
                                         <div>
                                             <div class="type">
@@ -120,9 +120,10 @@
                             <th>
                                 Кнопки
                             </th>
-                            @if (isset(Auth::user()->requests) || Auth::user()->requests !== null)
-                                @foreach (Auth::user()->requests as $index => $request)
 
+                            @if (isset(\Illuminate\Support\Facades\Auth::user()->requestss) || \Illuminate\Support\Facades\Auth::user()->requestss !== null)
+                                @foreach (\Illuminate\Support\Facades\Auth::user()->requestss as $index => $request)
+                                    @if($request->course)
                                     <tr>
                                         <td>
                                             {{ $index + 1 }}
@@ -140,6 +141,7 @@
 
                                         </td>
                                     </tr>
+                                    @endif
                                     {{-- <div>
                                             <div class="type">
                                                 Заявка

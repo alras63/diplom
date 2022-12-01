@@ -110,6 +110,7 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
     public function requestss()
     {
     return $this->hasMany('App\Request', 'user_id', 'id');

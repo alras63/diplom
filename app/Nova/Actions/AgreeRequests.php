@@ -11,13 +11,15 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use \Laravel\Nova\Fields\ActionFields;
 
-class AgreeRequests extends Action 
+class AgreeRequests extends Action
 {
     use InteractsWithQueue, Queueable;
 
     public function handle(ActionFields $fields, Collection $models)
   {
     foreach ($models as $model) {
+      $model->status = 'Одобрена или оплачена';
+      $model->save();
       $cp = new CoursePay(["user_id" => $model->user_id, "course_id" => $model->course_id]);
       $cp->save();
     }
