@@ -108,17 +108,21 @@ class CourseController extends Controller
 
 
     public function newInsertCourse(Request $request) {
-        $validate = Validator::make($request->all(), [
-            'email' => ['required', 'unique:users']
-        ]);
+        if(Auth::guest()) {
+            $validate = Validator::make($request->all(), [
+                'email' => ['required', 'unique:users']
+            ]);
 
-        if ($validate->fails()) {
             if ($validate->fails()) {
-                return Redirect::back();
+                if ($validate->fails()) {
+                    return Redirect::back();
+                }
             }
+            $validate = $validate->validated();
+
         }
 
-        $validate = $validate->validated();
+
         $input = $request->all();
         $uniq_number = $input['_token'];
         $request_polya	 = json_encode($input);
