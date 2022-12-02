@@ -72,13 +72,14 @@
         </div>
         <div class="mx-auto max-w-screen-xl">
             <div class="mt-4 flex items-center justify-between w-100">
-                <div class="flex items-center justify-between w-100">
-                    <a href="{{ route('course.list') }}"
-                       class=" flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                       style="text-decoration: none !important">
-                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" style="width: 16px;"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 487.3 487.3"
-                             style="enable-background:new 0 0 487.3 487.3;" xml:space="preserve">
+                <div class="flex items-center justify-between w-100 swiper-types">
+                    <div class="swiper-wrapper items-center types-course">
+                        <a href="{{ route('course.list') }}"
+                           class="swiper-slide flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                           style="text-decoration: none !important">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" style="width: 16px;"
+                                 x="0px" y="0px" viewBox="0 0 487.3 487.3"
+                                 style="enable-background:new 0 0 487.3 487.3;" xml:space="preserve">
                                 <g>
                                     <g>
                                         <path style="fill: #fff"
@@ -94,38 +95,39 @@
                                     </g>
                                 </g>
                             </svg>
-                        <span class="block ml-3 no-underline" style="text-decoration: none !important">
+                            <span class="block ml-3 no-underline" style="text-decoration: none !important">
                                 Каталог курсов
                             </span>
-                    </a>
-                    <a href="{{ route('course.list', ['type' => 'po']) }}"
-                       class=" flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                       style="text-decoration: none !important">
+                        </a>
+                        <a href="{{ route('course.list', ['type' => 'po']) }}"
+                           class="swiper-slide flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                           style="text-decoration: none !important">
                              <span class="block no-underline" style="text-decoration: none !important">
                               Профессиональное обучение
                             </span>
-                    </a>
-                    <a href="{{ route('course.list', ['type' => 'pk']) }}"
-                       class=" flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                       style="text-decoration: none !important">
+                        </a>
+                        <a href="{{ route('course.list', ['type' => 'pk']) }}"
+                           class="swiper-slide flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                           style="text-decoration: none !important">
                              <span class="blockno-underline" style="text-decoration: none !important">
                                 Повышение квалификации
                             </span>
-                    </a>
-                    <a href="{{ route('course.list', ['type' => 'dop']) }}"
-                       class=" flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                       style="text-decoration: none !important">
+                        </a>
+                        <a href="{{ route('course.list', ['type' => 'dop']) }}"
+                           class="swiper-slide flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                           style="text-decoration: none !important">
                              <span class="block no-underline" style="text-decoration: none !important">
                                 Дополнительное образование детей и взрослых
                             </span>
-                    </a>
-                    <a href="{{ route('course.list', ['type' => 'perepod']) }}"
-                       class=" flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                       style="text-decoration: none !important">
+                        </a>
+                        <a href="{{ route('course.list', ['type' => 'perepod']) }}"
+                           class="swiper-slide flex-shrink-0 inline-flex items-center space-3 no-underline hover:no-underline mx-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-3 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                           style="text-decoration: none !important">
                              <span class="block no-underline" style="text-decoration: none !important">
                                 Переподготовка
                             </span>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
