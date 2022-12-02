@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Storage;
                     <div class="flex flex-column justify-between">
                         <div class="relative ">
                             <div class="relative w-full h-72  rounded-lg overflow-hidden @if(false == \Illuminate\Support\Facades\Storage::exists($course->url)) bg-blue-100 text-center uppercase flex items-center justify-center text-md font-weight-bold text-blue-400 p-3" @endif>
-                                @if(false !== \Illuminate\Support\Facades\Storage::exists($course->url))
-                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($course->url) }}"
+                                @if(false !== \Illuminate\Support\Facades\Storage::disk('public')->exists($course->url))
+                                    <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($course->url) }}"
                                         class="w-full h-full object-center object-cover">
                                 @else
                                     {{$course->title}}
