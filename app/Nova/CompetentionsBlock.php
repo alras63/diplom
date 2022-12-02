@@ -39,47 +39,47 @@ class CompetentionsBlock extends Resource
      */
     public static function label()
     {
-        return __('Competentions Blocks');
+        return __('Виды курсов');
     }
 
     /**
-    * Get the displayable singular label of the resource.
-    *
-    * @return  string
-    */
+     * Get the displayable singular label of the resource.
+     *
+     * @return  string
+     */
     public static function singularLabel()
     {
-        return __('Competentions Block');
+        return __('Виды курсов');
     }
 
     /**
      * Get the fields displayed by the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function fields(Request $request)
     {
         return [
-                                                ID::make( __('Id'),  'id')
-->rules('required')
-->sortable()
-,
-                                                                Text::make( __('Name'),  'name')
-->rules('required')
-->sortable()
-,
-                                                                Text::make( __('Slug'),  'slug')
-->rules('required')
-->sortable()
-,
-                                    ];
+            ID::make(__('ИД'), 'id')
+                ->rules('required')
+                ->sortable()
+            ,
+            Text::make(__('Наименование'), 'name')
+                ->rules('required')
+                ->sortable()
+            ,
+            Text::make(__('СЛУГ (не менять)'), 'slug')
+                ->rules('required')
+                ->sortable()
+            ,
+        ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function cards(Request $request)
@@ -90,7 +90,7 @@ class CompetentionsBlock extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function filters(Request $request)
@@ -101,7 +101,7 @@ class CompetentionsBlock extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function lenses(Request $request)
@@ -112,7 +112,7 @@ class CompetentionsBlock extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function actions(Request $request)

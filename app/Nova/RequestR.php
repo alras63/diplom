@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\BelongsTo;
 use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 use Pdmfc\NovaFields\ActionButton;
+
 class RequestR extends Resource
 {
 
@@ -49,62 +50,59 @@ class RequestR extends Resource
      */
     public static function label()
     {
-        return __('Requests');
+        return __('Заявки');
     }
 
     /**
-    * Get the displayable singular label of the resource.
-    *
-    * @return  string
-    */
+     * Get the displayable singular label of the resource.
+     *
+     * @return  string
+     */
     public static function singularLabel()
     {
         return __('Request');
     }
 
 
-
     /**
      * Get the fields displayed by the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function fields(Request $request)
     {
         return [
-                                                ID::make( __('Id'),  'id')
-->rules('required')
-->sortable()
-,
-BelongsTo::make('User') ->display(function($someModel){ 
-    return $someModel->username;
-})
-->rules('required')
-->sortable()
-,
-BelongsTo::make('Course')
-                                                                ->rules('required')
-->sortable()
-,
+            ID::make(__('Id'), 'id')
+                ->rules('required')
+                ->sortable()
+            ,
+            BelongsTo::make('User')->display(function ($someModel) {
+                return $someModel->username;
+            })
+                ->rules('required')
+                ->sortable()
+            ,
+            BelongsTo::make('Course')
+                ->rules('required')
+                ->sortable()
+            ,
 
-HasOne::make('User')
-
-->rules('required')
-->sortable()
-,
-                                                                HasOne::make('Course')
-
-->rules('required')
-->sortable()
-,
-                                    ];
+            HasOne::make('User')
+                ->rules('required')
+                ->sortable()
+            ,
+            HasOne::make('Course')
+                ->rules('required')
+                ->sortable()
+            ,
+        ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function cards(Request $request)
@@ -115,7 +113,7 @@ HasOne::make('User')
     /**
      * Get the filters available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function filters(Request $request)
@@ -126,7 +124,7 @@ HasOne::make('User')
     /**
      * Get the lenses available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function lenses(Request $request)
@@ -134,10 +132,10 @@ HasOne::make('User')
         return [];
     }
 
-           /**
+    /**
      * Get the actions available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function actions(Request $request)
@@ -148,5 +146,5 @@ HasOne::make('User')
         ];
     }
 
- 
+
 }

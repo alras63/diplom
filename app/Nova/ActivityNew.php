@@ -17,6 +17,7 @@ class ActivityNew extends Resource
      */
     public static $model = \App\ActivityNew::class;
     public static $displayInNavigation = false;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *

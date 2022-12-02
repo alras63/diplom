@@ -45,7 +45,7 @@ class Course extends Resource
      */
     public static function label()
     {
-        return __('Courses');
+        return __('Курсы');
     }
 
     /**
@@ -55,7 +55,7 @@ class Course extends Resource
      */
     public static function singularLabel()
     {
-        return __('Course');
+        return __('Курсы');
     }
 
     /**
@@ -71,65 +71,61 @@ class Course extends Resource
                 ->rules('required')
                 ->sortable()
             ,
-            Text::make(__('Title'), 'title')
+            Text::make(__('Название'), 'title')
                 ->sortable()
             ,
-//                                                                 HasOne::make('Teacher')
-
-// ->sortable()
-// ,
-            Text::make(__('Description'), 'description')->displayUsing(function ($name) {
+            Text::make(__('Описание'), 'description')->displayUsing(function ($name) {
                 return \Str::limit($name, 55);
             })
                 ->sortable()
             ,
-            Text::make(__('Dates'), 'dates')
+            Text::make(__('Даты'), 'dates')
                 ->sortable()
             ,
-            Text::make(__('Cost'), 'cost')
+            Text::make(__('Стоимость'), 'cost')
                 ->sortable()
             ,
 
-            File::make(__('Url'), 'url')
+            File::make(__('Картинка'), 'url')
                 ->disk('public')
                 ->sortable()
             ,
-            Number::make(__('Sort'), 'sort')
-                ->sortable()
-            ,
-//                                                                 HasOne::make('ActivityNew')
-
-// ->sortable()
-// ,
-            Number::make(__('Click Registration'), 'click_registration')
-                ->sortable()
-            ,
-            Number::make(__('For Type'), 'for_type')
-                ->sortable()
-            ,
-            Number::make(__('Closed'), 'closed')
-                ->sortable()
-            ,
+//            Number::make(__('Сортировка'), 'sort')
+//                ->sortable()
+//            ,
+////                                                                 HasOne::make('ActivityNew')
+//
+//// ->sortable()
+//// ,
+//            Number::make(__('Кли'), 'click_registration')
+//                ->sortable()
+//            ,
+//            Number::make(__('For Type'), 'for_type')
+//                ->sortable()
+//            ,
+//            Number::make(__('Closed'), 'closed')
+//                ->sortable()
+//            ,
             HasMany::make('Modules')
                 ->sortable()
             ,
             HasMany::make('RequestR')
                 ->sortable()
             ,
-            Text::make(__('Oborud'), 'oborud')
+//            Text::make(__('Oborud'), 'oborud')
+//                ->sortable()
+//            ,
+            Text::make(__('Время'), 'time')
                 ->sortable()
             ,
-            Text::make(__('Time'), 'time')
-                ->sortable()
-            ,
-            Text::make(__('Docs'), 'docs')
-                ->sortable()
-            ,
-            Multiselect::make('Polya', 'polya')
+//            Text::make(__('Docs'), 'docs')
+//                ->sortable()
+//            ,
+            Multiselect::make('Поля для регистрации', 'polya')
                 ->asyncResource(Polya::class)
                 ->placeholder('Выберите поля для регистрации'),
 
-            Multiselect::make('blocks', 'blocks')
+            Multiselect::make('Типы курса', 'blocks')
                 ->asyncResource(CompetentionsBlock::class)
                 ->placeholder('Выберите блок(-и)')
 

@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use App\Course;
 use App\CoursePay;
+use App\Nova\Actions\AgreeRequests;
+use App\Nova\Actions\ExportRequests;
+use App\Nova\RequestR;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Cards\Help;
 use App\Nova\Metrics\NewUsers;
@@ -23,6 +27,36 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function boot()
     {
         parent::boot();
+
+
+    }
+
+
+    protected function resources()
+    {
+        Nova::resourcesIn(app_path('Nova'));
+        view()->composer('*', function($view)
+        {
+            $user = Auth::user();
+
+            if(isset($user) && $user->hasRole('ruc-dop')) {
+                Nova::resources([
+                    \App\Nova\RequestR::class,
+                    \App\Nova\Course::class,
+                    \App\Nova\CoursePay::class,
+                    \App\Nova\Module::class,
+                    \App\Nova\Lesson::class,
+                    \App\Nova\User::class,
+                    \App\Nova\Polya::class,
+                    \App\Nova\CompetentionsBlock::class,
+                    \App\Nova\TgUser::class,
+                    \App\Nova\TgEvent::class,
+                    \App\Nova\PriemEventRequest::class,
+//                    ExportRequests::class,
+//                    AgreeRequests::class
+                ]);
+            }
+        });
     }
 
     /**
@@ -48,7 +82,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewNova', function ($user) {
-            return $user->hasRole('super-admin');
+            return $user->hasRole('super-admin') || $user->hasRole('ruc-dop');
         });
         Gate::define('viewCourses', function ($user, CoursePay $coursepay) {
             return $user->id === $coursepay->user_id;
@@ -87,9 +121,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     public function tools()
     {
         return [
-            new \Cloudstudio\ResourceGenerator\ResourceGenerator(),
-            new \OptimistDigital\MenuBuilder\MenuBuilder,
-            new \Vyuldashev\NovaPermission\NovaPermissionTool,
+//            new \Cloudstudio\ResourceGenerator\ResourceGenerator(),
+//            new \OptimistDigital\MenuBuilder\MenuBuilder,
+//            new \Vyuldashev\NovaPermission\NovaPermissionTool,
 
         ];
     }
@@ -103,7 +137,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         //
         Gate::before(function ($user, $ability) {
-            return $user->hasRole('super-admin') ? true : false;
+            return $user->hasRole('super-admin') ||  $user->hasRole('ruc-dop');
         });
     }
 }
