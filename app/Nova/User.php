@@ -51,8 +51,12 @@ class User extends Resource
             Text::make('Name')
                 ->sortable()
                 ->rules('required', 'max:255'),
-           
+
             Text::make('Username')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
+            Text::make('tel')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
@@ -67,10 +71,10 @@ class User extends Resource
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
                 ->updateRules('nullable', 'string', 'min:8'),
-                
+
                 MorphToMany::make('Roles', 'roles', \Vyuldashev\NovaPermission\Role::class),
                 MorphToMany::make('Permissions', 'permissions', \Vyuldashev\NovaPermission\Permission::class),
-              
+
         ];
     }
 
