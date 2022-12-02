@@ -39,6 +39,8 @@ class ExportRequests extends DownloadExcel implements WithHeadings, WithEvents, 
             '#',
             'User',
             'Course',
+            'Tel',
+            'Email',
             'Created at',
             'Updated at'
         ];

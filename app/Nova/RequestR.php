@@ -92,6 +92,13 @@ class RequestR extends Resource
                 ->rules('required')
                 ->sortable()
             ,
+            Text::make('Tel', 'user.tel')
+                ->rules('required')
+                ->sortable(),
+            Text::make('Email', 'user.email')
+                ->rules('required')
+                ->sortable()
+            ,
             HasOne::make('Course')
                 ->rules('required')
                 ->sortable()
