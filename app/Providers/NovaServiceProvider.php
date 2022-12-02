@@ -52,9 +52,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     \App\Nova\TgUser::class,
                     \App\Nova\TgEvent::class,
                     \App\Nova\PriemEventRequest::class,
+                    \App\Nova\PriemEventRequest::class,
 //                    ExportRequests::class,
 //                    AgreeRequests::class
                 ]);
+            } else if($user->hasRole('super-admin')) {
+                 Nova::resourcesIn(app_path('Nova'));
             }
         });
     }
