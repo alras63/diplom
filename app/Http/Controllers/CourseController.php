@@ -138,7 +138,7 @@ class CourseController extends Controller
 
             $username = strtolower($this->translit($f[0]) . '-' . abs(crc32(uniqid())));
 
-            $data = ['name' =>  $request->fio, 'username' => $username, "password" => $request->pass, "fio" => $request->fio,  "tel" => $request->tel,  "email" => $request->email];
+            $data = ['name' =>  $request->fio, 'username' => $username, "password" => $request->pass, "fio" => $request->fio,  "tel" => $request->phone,  "email" => $request->email];
 
             $user = $this->createUser($data);
         }
