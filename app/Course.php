@@ -76,6 +76,8 @@ protected $casts = [
 'url' => 'string',
 ];
 
+protected $guarded = [];
+
 public function teacher()
 {
 return $this->hasOne('App\Teacher', 'teacher_id', 'id');
@@ -115,7 +117,7 @@ public function countlessons()
                 $countInModule = count($module->lesson);
                 $result += $countInModule;
             }
-           
+
         }
     }
     return $result;
@@ -124,8 +126,8 @@ public function countlessons()
 public function completelessons()
 {
     $result = 0;
-    
-  
+
+
     if($this->modules != '') {
         foreach($this->modules as $module) {
             $lessons = $module->lesson;
@@ -134,12 +136,12 @@ public function completelessons()
                     $lessonComplete = $lesson->isComplete(\Auth::user()->id);
                     if($lessonComplete) {
                         $result += 1;
-    
+
                     }
                 }
             }
-            
-           
+
+
         }
     }
     return $result;
@@ -154,7 +156,7 @@ public function lessonids() {
                     array_push($result, $lesson->id);
                 }
             }
-        } 
+        }
     }
 
     return $result;
