@@ -5,9 +5,9 @@
 
     <section id="catalog_courses">
         <div class="max-w-screen-xl mx-auto">
-            <div class="d-flex items-start" style="max-height: 330px">
-                <div class="rounded-lg  d-flex items-center flex-shrink-0 mr-4" style="width: 70%; background-image: linear-gradient(120deg, #5eb1ff 0%, #66a6ff 100%);">
-                    <div class="p-6 flex-shrink-0" style="width: 45%">
+            <div class="d-flex items-start col-on-mobile" style="max-height: 330px">
+                <div class="rounded-lg  d-flex items-center flex-shrink-0 mr-4 w100-mob" style="width: 70%; background-image: linear-gradient(120deg, #5eb1ff 0%, #66a6ff 100%);">
+                    <div class="p-6 flex-shrink-0 w100-mob" style="width: 45%" >
                         <h1 class="text-2xl text-white font-semibold">
                             Программы ПО и ДПО <br> от ведущего колледжа Самары
                         </h1>
@@ -15,7 +15,7 @@
                             Дополнительное образование по самым разным направлениям для всех категорий граждан в Самарском государственном колледже! Различные графики и формы обучения
                         </p>
                     </div>
-                    <div style="height: 100%">
+                    <div style="height: 100%" class="hide-mobile">
                         <img src="{{ asset('images/image-block.png') }}" alt="Картинка">
                     </div>
 
