@@ -145,6 +145,8 @@ class CourseController extends Controller
 
         if(null == $user) {
             $user = Auth::user();
+            $user->tel = $request->phone;
+            $user->save();
         }
 
         $user_id = $user->id;
