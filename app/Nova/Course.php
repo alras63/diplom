@@ -89,7 +89,9 @@ class Course extends Resource
             Text::make(__('Cost'), 'cost')
                 ->sortable()
             ,
+
             File::make(__('Url'), 'url')
+                ->disk('public')
                 ->sortable()
             ,
             Number::make(__('Sort'), 'sort')
