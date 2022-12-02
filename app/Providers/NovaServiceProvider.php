@@ -126,7 +126,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
 //            new \Cloudstudio\ResourceGenerator\ResourceGenerator(),
 //            new \OptimistDigital\MenuBuilder\MenuBuilder,
-//            new \Vyuldashev\NovaPermission\NovaPermissionTool,
+            new \Vyuldashev\NovaPermission\NovaPermissionTool,
 
         ];
     }
