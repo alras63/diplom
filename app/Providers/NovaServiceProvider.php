@@ -34,7 +34,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
     protected function resources()
     {
-        Nova::resourcesIn(app_path('Nova'));
+        parent::resources();
         view()->composer('*', function($view)
         {
             $user = Auth::user();
