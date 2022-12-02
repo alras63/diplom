@@ -97,6 +97,11 @@ class User extends Authenticatable
         'permissions',
     ];
 
+    public function getAuthPassword()
+    {
+        return ['password' => $this->attributes['password']];
+    }
+
     /**
      * The attributes for which can use sort in url.
      *
