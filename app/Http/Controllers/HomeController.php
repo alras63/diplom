@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function checkQr($uniq)
     {
-        $priemRequest = PriemEventsRequests::where('uniq', '=', $uniq)->first();
+        $priemRequest = PriemEventsRequests::where('uniq', '=', $uniq)->where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->first();
 
         if(null === $priemRequest) {
             $priemRequest->visited = 1;
@@ -39,7 +39,7 @@ class HomeController extends Controller
 
             return view('checkQR', ['bool' => false]);
         } else {
-            return view('checkQR', ['bool' => true]);
+            return view('checkQR', ['bool' => true, 'priemRequest' => $priemRequest]);
         }
 
 

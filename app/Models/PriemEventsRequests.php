@@ -12,6 +12,8 @@ class PriemEventsRequests extends Model
         return $this->hasOne(TgUser::class, 'id', 'tg_user_id');
     }
 
+    public const REL_TGUSER = 'tguser';
+
     function tgevent() {
         return $this->hasOne(PriemEvents::class, 'id', 'priem_event_id');
     }
