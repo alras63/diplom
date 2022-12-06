@@ -7,8 +7,9 @@
 
 
     </h2>
-
+    <br>
+    <br>
     <h2>
-        {{isset($priemRequest->tgevent) ? $priemRequest->tgevent->title : "Нет записи" }}
+        {{isset($priemRequest->tgevent) ? $priemRequest->tgevent->name : "Нет записи" }}
     </h2>
 @endif
