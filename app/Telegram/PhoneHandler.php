@@ -6,14 +6,14 @@ use App\Models\TgUser;
 use WeStacks\TeleBot\Handlers\CommandHandler;
 
 
-class CityHandler extends CommandHandler
+class PhoneHandler extends CommandHandler
 {
     public function trigger(): bool
     {
         if (isset($this->update->message->text) && !empty($this->update->message->text)) {
             $tgUser = TgUser::whereTgUserId($this->update->user()->id)->first();
 
-            if (isset($tgUser) && $tgUser->register_step === 3) {
+            if (isset($tgUser) && $tgUser->register_step === 5) {
                 return true;
             }
 
@@ -30,11 +30,11 @@ class CityHandler extends CommandHandler
             $tgUser = TgUser::whereTgUserId($this->update->user()->id)->first();
 
             if (null !== $tgUser) {
-                $tgUser->city = $this->update->message->text;
+                $tgUser->phone = $this->update->message->text;
 
                 if($tgUser->save()) {
-                    $text    = "Введите номер школы";
-                    $tgUser->register_step = 4;
+                    $text    = "Введите адрес эл.почты";
+                    $tgUser->register_step = 6;
                     $tgUser->save();
                     $this->sendMessage([
                         'text'                => $text,
