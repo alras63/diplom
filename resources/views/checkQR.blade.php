@@ -9,7 +9,7 @@
     </h2>
     <br>
     <br>
-    <h2>
+    <h2 style="font-size: 60px">
         {{isset($priemRequest->tgevent) ? $priemRequest->tgevent->name : "Нет записи" }}
     </h2>
 @endif
