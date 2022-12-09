@@ -57,12 +57,10 @@ class HomeController extends Controller
                         $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! \n";
                         $text .= "Напоминаем о том, что вы записывались на мастер-класс" . ($priemRequest->tgevent->name ?? ' ') . "в рамках мероприятия 'День открытых дверей 10 декабря' \n\n";
                         $text .= "Мастер-класс состоится 10 декабря в 10:00 по адресу " . ($priemRequest->tgevent->address) . ". На входе покажите индивидуальный QR-код, подтверждающий запись!";
-                        TeleBot::sendMessage(['chat_id' => 344878981,
+                        TeleBot::sendMessage(['chat_id' => $priemRequest->tguser->tg_user_id,
                                               'text'    => $text,
                         ]);
                     }
-
-                    sleep(1);
                 }
 
             }
