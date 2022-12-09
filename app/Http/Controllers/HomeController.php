@@ -45,7 +45,7 @@ class HomeController extends Controller
 
     }
 
-    public function sendNap($uniq)
+    public function sendNap()
     {
         if (Auth::check()) {
             $priemRequests = PriemEventsRequests::where('uniq', '=', $uniq)->where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->with(PriemEventsRequests::REL_TGEVENT)->get();
