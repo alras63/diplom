@@ -25,6 +25,7 @@ Route::get('/', function () {
 })->name('/');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/checkQR/{uniq}', [App\Http\Controllers\HomeController::class, 'checkQr'])->name('checkQr');
+Route::get('/sendNap', [App\Http\Controllers\HomeController::class, 'sendNap'])->name('sendNap');
 Route::any('/competentions', [App\Http\Controllers\CompetentionsController::class, 'index'])->name('competentions');
 Route::any('/competentions/addusercomp', [App\Http\Controllers\CompetentionsController::class, 'addusercomp'])->name('addusercomp');
 Route::any('/competentions/resume', [App\Http\Controllers\CompetentionsController::class, 'getresume'])->name('getresume');

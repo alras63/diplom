@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Courses;
 use App\Models\PriemEventsRequests;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use WeStacks\TeleBot\Laravel\TeleBot;
 
 class HomeController extends Controller
 {
@@ -31,14 +31,41 @@ class HomeController extends Controller
 
     public function checkQr($uniq)
     {
-        $priemRequest = PriemEventsRequests::where('uniq', '=', $uniq)->where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->first();
+        $priemRequest = PriemEventsRequests::where('uniq', '=', $uniq)->where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->with(PriemEventsRequests::REL_TGEVENT)->first();
 
-        if(null === $priemRequest) {
+        if (null === $priemRequest) {
             return view('checkQR', ['bool' => false]);
         } else {
             $priemRequest->visited = 1;
             $priemRequest->save();
-            return view('checkQR', ['bool' => true, 'priemRequest' => $priemRequest]);
+            return view('checkQR', ['bool'         => true,
+                                    'priemRequest' => $priemRequest]);
+        }
+
+
+    }
+
+    public function sendNap($uniq)
+    {
+        if (Auth::check()) {
+            $priemRequests = PriemEventsRequests::where('uniq', '=', $uniq)->where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->with(PriemEventsRequests::REL_TGEVENT)->get();
+
+            if (null !== $priemRequests) {
+                foreach ($priemRequests as $priemRequest) {
+                    if ($priemRequest->tguser->tg_user_id === 344878981) {
+
+                        $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! \n";
+                        $text .= "Напоминаем о том, что вы записывались на мастер-класс" . ($priemRequest->tgevent->name ?? ' ') . "в рамках мероприятия 'День открытых дверей 10 декабря' \n\n";
+                        $text .= "Мастер-класс состоится 10 декабря в 10:00 по адресу " . ($priemRequest->tgevent->address) . ". На входе покажите индивидуальный QR-код, подтверждающий запись!";
+                        TeleBot::sendMessage(['chat_id' => 344878981,
+                                              'text'    => $text,
+                        ]);
+                    }
+
+                    sleep(1);
+                }
+
+            }
         }
 
 
