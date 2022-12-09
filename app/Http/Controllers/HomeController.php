@@ -50,6 +50,7 @@ class HomeController extends Controller
         if (Auth::check()) {
             $priemRequests = PriemEventsRequests::where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->with(PriemEventsRequests::REL_TGEVENT)->get();
 
+            dd($priemRequests);
             if (null !== $priemRequests) {
                 foreach ($priemRequests as $priemRequest) {
                     if ($priemRequest->tguser->tg_user_id === 344878981) {
