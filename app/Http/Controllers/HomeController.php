@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PriemEventsRequests;
+use App\Models\TgUser;
 use Illuminate\Support\Facades\Auth;
 use WeStacks\TeleBot\Laravel\TeleBot;
 
@@ -58,6 +59,40 @@ class HomeController extends Controller
                     TeleBot::sendMessage(['chat_id' => $priemRequest->tguser->tg_user_id,
                                           'text'    => $text,
                     ]);
+                }
+
+            }
+        }
+
+
+    }
+
+    public function sendOtziv()
+    {
+        if (Auth::check()) {
+            $priemRequests = PriemEventsRequests::where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->with(PriemEventsRequests::REL_TGEVENT)->get();
+
+            if (null !== $priemRequests) {
+                foreach ($priemRequests as $priemRequest) {
+                    try {
+                        $tgUs = TgUser::whereId($priemRequest->tguser->th_user_id)->first();
+                        if($tgUs->tg_user_id == "344878981") {
+                            $tgUs->register_step = 8;
+                            $tgUs->save();
+
+                            $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! \n\n";
+                            $text .= "Как тебе наш день открытых дверей? Что понравилось? Что не понравилось? Что можно улучшить? \n\n";
+                            $text .= "Напиши развернутый отзыв ниже, мы будем благодарны! ";
+
+                            TeleBot::sendMessage(['chat_id' => $priemRequest->tguser->tg_user_id,
+                                                  'text'    => $text,
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        TeleBot::sendMessage(['chat_id' => 344878981,
+                                            'text' => $e->getCode() . ' ' . $e->getMessage() . " " . $e->getLine() . " " . $e->getFile(),]);
+                    }
+
                 }
 
             }
