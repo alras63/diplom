@@ -54,9 +54,9 @@ class HomeController extends Controller
             if (null !== $priemRequests) {
                 foreach ($priemRequests as $priemRequest) {
                     if ($priemRequest->tguser->tg_user_id === "344878981") {
-                        $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! \n";
-                        $text .= "Напоминаем о том, что вы записывались на мастер-класс" . ($priemRequest->tgevent->name ?? ' ') . "в рамках мероприятия 'День открытых дверей 10 декабря' \n\n";
-                        $text .= "Мастер-класс состоится 10 декабря в 10:00 по адресу " . ($priemRequest->tgevent->address) . ". На входе покажите индивидуальный QR-код, подтверждающий запись!";
+                        $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! \n\n";
+                        $text .= "Напоминаем о том, что вы записывались на мастер-класс \n\n" . ($priemRequest->tgevent->name ?? ' ') . "\n\n в рамках мероприятия 'День открытых дверей 10 декабря' \n\n";
+                        $text .= "Мастер-класс состоится 10 декабря в 10:00 по адресу " . ($priemRequest->tgevent->address) . ". \n\n На входе покажите индивидуальный QR-код, подтверждающий запись!";
                         TeleBot::sendMessage(['chat_id' => $priemRequest->tguser->tg_user_id,
                                               'text'    => $text,
                         ]);
