@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -31,15 +31,14 @@ class HomeController extends Controller
 
     public function checkQr($uniq)
     {
-        $priemRequest = PriemEventsRequests::where('uniq', '=', $uniq)->first();
+        $priemRequest = PriemEventsRequests::where('uniq', '=', $uniq)->where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->first();
 
         if(null === $priemRequest) {
-            $priemRequest->visited = 1;
-            $priemRequest->save();
-
             return view('checkQR', ['bool' => false]);
         } else {
-            return view('checkQR', ['bool' => true]);
+            $priemRequest->visited = 1;
+            $priemRequest->save();
+            return view('checkQR', ['bool' => true, 'priemRequest' => $priemRequest]);
         }
 
 

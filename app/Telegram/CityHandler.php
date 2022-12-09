@@ -33,7 +33,7 @@ class CityHandler extends CommandHandler
                 $tgUser->city = $this->update->message->text;
 
                 if($tgUser->save()) {
-                    $text    = "Для выбора мероприятий отправьте команду /events";
+                    $text    = "Введите номер школы";
                     $tgUser->register_step = 4;
                     $tgUser->save();
                     $this->sendMessage([
