@@ -50,11 +50,11 @@ class HomeController extends Controller
         if (Auth::check()) {
             $priemRequests = PriemEventsRequests::where('is_active', '=', 1)->with(PriemEventsRequests::REL_TGUSER)->with(PriemEventsRequests::REL_TGEVENT)->get();
 
-            dd($priemRequests);
+
             if (null !== $priemRequests) {
                 foreach ($priemRequests as $priemRequest) {
                     if ($priemRequest->tguser->tg_user_id === 344878981) {
-
+                        dd($priemRequest->tguser->tg_user_id);
                         $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! \n";
                         $text .= "Напоминаем о том, что вы записывались на мастер-класс" . ($priemRequest->tgevent->name ?? ' ') . "в рамках мероприятия 'День открытых дверей 10 декабря' \n\n";
                         $text .= "Мастер-класс состоится 10 декабря в 10:00 по адресу " . ($priemRequest->tgevent->address) . ". На входе покажите индивидуальный QR-код, подтверждающий запись!";
