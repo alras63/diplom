@@ -77,7 +77,7 @@ class HomeController extends Controller
                     try {
                         $tgUs = TgUser::whereTgUserId((int)$priemRequest->tguser->tg_user_id)->first();
 
-                        if(null !== $tgUs && $tgUs->tg_user_id == "344878981") {
+//                        if(null !== $tgUs && $tgUs->tg_user_id == "344878981") {
                             $tgUs->register_step = 8;
                             $tgUs->save();
 
@@ -88,7 +88,8 @@ class HomeController extends Controller
                             TeleBot::sendMessage(['chat_id' => $tgUs->tg_user_id,
                                                   'text'    => $text,
                             ]);
-                        }
+//                        }
+
                     } catch (\Exception $e) {
                         TeleBot::sendMessage(['chat_id' => 344878981,
                                             'text' => $e->getCode() . ' ' . $e->getMessage() . " " . $e->getLine() . " " . $e->getFile(),]);
