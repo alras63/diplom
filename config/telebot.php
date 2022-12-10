@@ -48,6 +48,7 @@ return [
             'handlers' => [
                 \App\Telegram\StartCommand::class,
                 \App\Telegram\TypeHandler::class,
+                \App\Telegram\OtzivHandler::class,
                 \App\Telegram\EmailHandler::class,
                 \App\Telegram\PhoneHandler::class,
                 \App\Telegram\SchoolHandler::class,
