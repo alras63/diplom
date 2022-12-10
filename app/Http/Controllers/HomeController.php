@@ -76,12 +76,12 @@ class HomeController extends Controller
                 foreach ($priemRequests as $priemRequest) {
                     try {
                         $tgUs = TgUser::whereTgUserId((int)$priemRequest->tguser->tg_user_id)->first();
-                        dd($priemRequest->tguser->tg_user_id, $tgUs);
+
                         if(null !== $tgUs && $tgUs->tg_user_id == "344878981") {
                             $tgUs->register_step = 8;
                             $tgUs->save();
 
-                            $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! \n\n";
+                            $text = "Добрый день, " . ($priemRequest->tguser->fio ?? 'абитуриент') . "! Прошлое сообщение мы отправили по ошибке, ведь мы хотели узнать твое мнение про уже прошедшее мероприятие! \n\n";
                             $text .= "Как тебе наш день открытых дверей? Что понравилось? Что не понравилось? Что можно улучшить? \n\n";
                             $text .= "Напиши развернутый отзыв ниже, мы будем благодарны! ";
 
