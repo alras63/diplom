@@ -76,6 +76,7 @@ class HomeController extends Controller
                 foreach ($priemRequests as $priemRequest) {
                     try {
                         $tgUs = TgUser::whereId($priemRequest->tguser->tg_user_id)->first();
+                        dd($tgUs->tg_user_id);
                         if(null !== $tgUs && $tgUs->tg_user_id == "344878981") {
                             $tgUs->register_step = 8;
                             $tgUs->save();
@@ -84,7 +85,7 @@ class HomeController extends Controller
                             $text .= "Как тебе наш день открытых дверей? Что понравилось? Что не понравилось? Что можно улучшить? \n\n";
                             $text .= "Напиши развернутый отзыв ниже, мы будем благодарны! ";
 
-                            TeleBot::sendMessage(['chat_id' => $priemRequest->tguser->tg_user_id,
+                            TeleBot::sendMessage(['chat_id' => 344878981,
                                                   'text'    => $text,
                             ]);
                         }
