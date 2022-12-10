@@ -75,8 +75,8 @@ class HomeController extends Controller
             if (null !== $priemRequests) {
                 foreach ($priemRequests as $priemRequest) {
                     try {
-                        $tgUs = TgUser::whereId($priemRequest->tguser->th_user_id)->first();
-                        if($tgUs->tg_user_id == "344878981") {
+                        $tgUs = TgUser::whereId($priemRequest->tguser->tg_user_id)->first();
+                        if(null !== $tgUs && $tgUs->tg_user_id == "344878981") {
                             $tgUs->register_step = 8;
                             $tgUs->save();
 
