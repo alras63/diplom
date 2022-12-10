@@ -85,7 +85,7 @@ class HomeController extends Controller
                             $text .= "Как тебе наш день открытых дверей? Что понравилось? Что не понравилось? Что можно улучшить? \n\n";
                             $text .= "Напиши развернутый отзыв ниже, мы будем благодарны! ";
 
-                            TeleBot::sendMessage(['chat_id' => 344878981,
+                            TeleBot::sendMessage(['chat_id' => $tgUs->tg_user_id,
                                                   'text'    => $text,
                             ]);
                         }
