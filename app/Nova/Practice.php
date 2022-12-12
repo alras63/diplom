@@ -4,26 +4,26 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\HasOne;
-use Laravel\Nova\Fields\File;
-use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 
-class LessonsContent extends Resource
+
+class Practice extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var  string
      */
-    public static $model = \App\LessonsContent::class;
-    public static $displayInNavigation = false;
+    public static $model = \App\Models\Practice::class;
+
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var  string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -31,7 +31,7 @@ class LessonsContent extends Resource
      * @var  array
      */
     public static $search = [
-        'id', 'lesson_id', 'content', 'link_pdf'
+        'id', 'lesson_id', 'title', 'content'
     ];
 
     /**
@@ -41,7 +41,7 @@ class LessonsContent extends Resource
      */
     public static function label()
     {
-        return __('Lessons Contents');
+        return __('Практические работы (список)');
     }
 
     /**
@@ -51,7 +51,7 @@ class LessonsContent extends Resource
      */
     public static function singularLabel()
     {
-        return __('Lessons Content');
+        return __('Практические работы (список)');
     }
 
     /**
@@ -67,14 +67,14 @@ class LessonsContent extends Resource
                 ->rules('required')
                 ->sortable()
             ,
+            Text::make(__('title'), 'title')
+                ->sortable()
+            ,
+            Text::make(__('content'), 'content')
+                ->sortable()
+            ,
             HasOne::make('Lesson')
                 ->rules('required')
-                ->sortable()
-            ,
-            NovaTinyMCE::make(__('Content'), 'content')
-                ->sortable()
-            ,
-            File::make(__('Link Pdf'), 'link_pdf')
                 ->sortable()
             ,
         ];

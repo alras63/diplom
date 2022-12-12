@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\HasOne;
@@ -44,10 +45,10 @@ class Lesson extends Resource
     }
 
     /**
-    * Get the displayable singular label of the resource.
-    *
-    * @return  string
-    */
+     * Get the displayable singular label of the resource.
+     *
+     * @return  string
+     */
     public static function singularLabel()
     {
         return __('Lesson');
@@ -56,37 +57,39 @@ class Lesson extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function fields(Request $request)
     {
         return [
-                                                ID::make( __('Id'),  'id')
-->rules('required')
-->sortable()
-,
-                                                                Text::make( __('Title'),  'title')
-->rules('required')
-->sortable()
-,
-                                                                HasOne::make('Module')
-
-->rules('required')
-->sortable()
-,
-                                                                HasOne::make('LessonsContent')
-
-->rules('required')
-->sortable()
-,
-                                    ];
+            ID::make(__('Id'), 'id')
+                ->rules('required')
+                ->sortable()
+            ,
+            Text::make(__('Title'), 'title')
+                ->rules('required')
+                ->sortable()
+            ,
+            HasOne::make('Module')
+                ->rules('required')
+                ->sortable()
+            ,
+            HasOne::make('LessonsContent')
+                ->rules('required')
+                ->sortable()
+            ,
+            HasMany::make('Practice')
+                ->rules('required')
+                ->sortable()
+            ,
+        ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function cards(Request $request)
@@ -97,7 +100,7 @@ class Lesson extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function filters(Request $request)
@@ -108,7 +111,7 @@ class Lesson extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function lenses(Request $request)
@@ -119,7 +122,7 @@ class Lesson extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param    \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return  array
      */
     public function actions(Request $request)

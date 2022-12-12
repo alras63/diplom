@@ -39,33 +39,33 @@ class PlatformController extends Controller
         if(isset($course_pay) && $course_pay !== null) {
             $modules = $course->modules;
             $lesson_id = null;
-    
+
             $active_lesson = $this->getActiveLesson($modules);
-         
-    
+
+
             if(isset($active_lesson) && $active_lesson != '') {
-    
+
                 return view('platform', ['course'=> $course, 'modules'=> $modules,  'active_lesson' => $lesson_id]);
             } else {
                 return view('platform', ['course'=> $course, 'modules'=> $modules, 'lessonfc' => $active_lesson, ]);
-    
+
             }
         }
         $error = (object)[];
         $error->type = "step";
         $error->text = "К сожалению, Вы не можете изучить материалы данного курса. Дождитесь подтверждения заявки администратором";
         return view('platform', ['error'=> $error->type, 'text' => $error->text]);
-        
+
 
         // abort(403);
-      
+
     }
 
     private function getActiveLesson($modules) {
 
         foreach($modules as $module) {
             $course = $module->course;
-        
+
             $course_pay = CoursePay::where('user_id', \Auth::User()->id)->where('course_id', $course->id)->first();
             if(isset($course_pay) && $course_pay !== null) {
             $lessons_a = [];
@@ -83,10 +83,10 @@ class PlatformController extends Controller
         } else {
             abort(403);
         }
-           
+
         }
 
-        
+
     }
     public function module(Request $request)
     {
@@ -96,11 +96,11 @@ class PlatformController extends Controller
         // }
 
         $course = Courses::where('id', $request->course_id)->first();
-    
+
         $modules = $course->modules;
         $active_lesson = $this->getActiveLesson($modules);
         $lessonIds = $course->lessonids();
-      
+
         $firstLesson = $lessonIds[0];
         $endlesson = end($lessonIds);
         $endlessonComplete = UserLessonComplete::where('user_id', Auth::user()->id)->where('lesson_id', $endlesson)->first();
@@ -122,9 +122,9 @@ class PlatformController extends Controller
         if(!$request->lesson_id) {
             $lesson_id = $firstLesson;
         }
-        
+
         if($request->lesson_id != $firstLesson) {
-           
+
 
             // var_dump($lessonBeforeId);
             $userLessonComplete = UserLessonComplete::where('user_id', Auth::user()->id)->where('lesson_id', $lessonBeforeId)->first();
@@ -135,30 +135,30 @@ class PlatformController extends Controller
                 return view('platform', ['error'=> $error->type, 'text' => $error->text]);
             }
         }
-       
+
         $lesson = Lessons::where('id', $request->lesson_id)->first();
-        
+
         if(isset($lesson) && $lesson != NULL) {
             $course_id = $lesson->module->course->id;
             $module_id = $lesson->module->id;
-    
+
             if($course_id != $request->course_id) {
                 abort(403, 'Access denied');
-                
+
             }
         }
-        
-     
+
+
         return view('platform', ['type'=>'module', 'course'=> $course, 'modules'=> $modules, 'lessonfc' => $lesson]);
     }
     public function lesson(Request $request)
     {
         $course = Courses::where('id', $request->course_id)->first();
-    
+
         $modules = $course->modules;
         $active_lesson = $this->getActiveLesson($modules);
         $lessonIds = $course->lessonids();
-      
+
         $firstLesson = $lessonIds[0];
         $endlesson = end($lessonIds);
         $endlessonComplete = UserLessonComplete::where('user_id', Auth::user()->id)->where('lesson_id', $endlesson)->first();
@@ -180,9 +180,9 @@ class PlatformController extends Controller
         if(!$request->lesson_id) {
             $lesson_id = $firstLesson;
         }
-        
+
         if($request->lesson_id != $firstLesson) {
-           
+
 
             // var_dump($lessonBeforeId);
             $userLessonComplete = UserLessonComplete::where('user_id', Auth::user()->id)->where('lesson_id', $lessonBeforeId)->first();
@@ -193,35 +193,35 @@ class PlatformController extends Controller
                 return view('platform', ['error'=> $error->type, 'text' => $error->text]);
             }
         }
-       
+
         $lesson = Lessons::where('id', $request->lesson_id)->first();
         if($lesson) {
             $course_id = $lesson->module->course->id;
             $module_id = $lesson->module->id;
-    
+
             if($course_id != $request->course_id) {
                 abort(403, 'Access denied');
-                
+
             }
-         
-            
+
+
                 return view('platform', ['course'=> $course, 'modules'=> $modules, 'lessonfc' => $lesson, 'active_lesson' => $active_lesson]);
         }
-      
- 
-   
-        
+
+
+
+
     }
 
     public function practice(Request $request)
     {
 
         $course = Courses::where('id', $request->course_id)->first();
-    
+
         $modules = $course->modules;
         $active_lesson = $this->getActiveLesson($modules);
         $lessonIds = $course->lessonids();
-      
+
         $firstLesson = $lessonIds[0];
         $endlesson = end($lessonIds);
         $endlessonComplete = UserLessonComplete::where('user_id', Auth::user()->id)->where('lesson_id', $endlesson)->first();
@@ -241,13 +241,13 @@ class PlatformController extends Controller
             $lessonAfterId = $lessonIds[$index_id];
 
         }
-        
+
         if(!$request->lesson_id) {
             $lesson_id = $firstLesson;
         }
-        
+
         if($request->lesson_id != $firstLesson) {
-           
+
 
             // var_dump($lessonBeforeId);
             $userLessonComplete = UserLessonComplete::where('user_id', Auth::user()->id)->where('lesson_id', $lessonBeforeId)->first();
@@ -258,15 +258,15 @@ class PlatformController extends Controller
                 return view('platform', ['error'=> $error->type, 'text' => $error->text]);
             }
         }
-       
+
         $lesson = Lessons::where('id', $request->lesson_id)->first();
-     
+
         $course_id = $lesson->module->course->id;
         $module_id = $lesson->module->id;
 
         if($course_id != $request->course_id) {
             abort(403, 'Access denied');
-            
+
         }
 
         $prct = Practice::where("id", $request->practice_id)->first();
@@ -285,6 +285,8 @@ class PlatformController extends Controller
                     'comment' => $request->comment,
                     'complete_status' => '1'
                 ]);
+
+                return redirect()->back();
             } else {
                 $error = (object)[];
                     $error->type = "already_exist";
@@ -295,10 +297,10 @@ class PlatformController extends Controller
             $error = (object)[];
             $error->type = "file_not_found";
             $error->text = "К сожалению, Вы не прикрепили файл. Это обязательное поле";
-            return view('platform', ['error'=> $error->type, 'text' => $error->text]);   
+            return view('platform', ['error'=> $error->type, 'text' => $error->text]);
         }
-       
-       
+
+
     }
 
     public function lessonsave(Request $request) {
