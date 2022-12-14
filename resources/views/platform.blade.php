@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\Storage;
 
                             @endif
                         </div>
-                    @else
+                    @elseif(null === \App\Models\UserPracticalComplete::where("user_id",  \Illuminate\Support\Facades\Auth::user()->id)->where("practical_id", $practice->id)->first())
                         <div class="card_alras view">
 
                             <h2 class="lessons_pretitle">
@@ -164,6 +164,13 @@ use Illuminate\Support\Facades\Storage;
                             </div>
 
 
+                        </div>
+                    @else
+                        <div class="card_alras view">
+
+                            <h2 class="lessons_pretitle">
+                                Вы уже проходили практическую работу. Переходите к следующей лекции
+                            </h2>
                         </div>
                     @endif
 
