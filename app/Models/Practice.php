@@ -39,7 +39,7 @@ class Practice extends Model
         'content'
     ];
 
-    
+
     public function lesson()
     {
         return $this->hasOne(Lessons::class, 'id', 'lesson_id');
@@ -50,8 +50,5 @@ class Practice extends Model
         $complete = UserPracticalComplete::where('practical_id', $this->id)->where('user_id', $user_id)->where('complete_status', 1)->first();
         return $complete ? true : false;
     }
-
-
-
 
 }

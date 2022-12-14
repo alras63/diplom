@@ -55,8 +55,14 @@ public function isComplete($user_id) {
     return $complete ? true : false;
 }
 
-public function practices()
-{
-    return $this->hasMany(Practice::class, 'lesson_id', 'id');
-}
+    public function practices()
+    {
+        return $this->hasMany('App\Models\Practice', 'lesson_id', 'id');
+    }
+
+
+    public function practice()
+    {
+        return $this->hasMany('App\Models\Practice', 'lesson_id', 'id');
+    }
 }
