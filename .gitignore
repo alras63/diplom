@@ -18,7 +18,6 @@ yarn-error.log
 /public/js/
 /public/vendor/
 /public/videos/
-/public/*.**
 package-lock.json
 /storage/app/public
 /public/js/**.*
