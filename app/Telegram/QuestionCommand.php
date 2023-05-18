@@ -2,6 +2,7 @@
 
 namespace App\Telegram;
 
+use App\Models\QuestionTg;
 use Symfony\Component\Console\Question\Question;
 use WeStacks\TeleBot\Handlers\CommandHandler;
 
@@ -24,7 +25,7 @@ class QuestionCommand extends CommandHandler
 
             $text = "Добрый день! Вот список вопросов, которые мы получаем чаще всего: \n\n";
 
-            $questions = Question::where('active', 1)->get();
+            $questions = QuestionTg::where('active', 1)->get();
 
             $num = 1;
 
