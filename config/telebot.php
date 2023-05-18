@@ -47,6 +47,7 @@ return [
 
             'handlers' => [
                 \App\Telegram\StartCommand::class,
+                \App\Telegram\QuestionCommand::class,
                 \App\Telegram\TypeHandler::class,
                 \App\Telegram\OtzivHandler::class,
                 \App\Telegram\EmailHandler::class,
@@ -55,7 +56,9 @@ return [
                 \App\Telegram\CityHandler::class,
                 \App\Telegram\FioHandler::class,
                 \App\Telegram\EventsCommand::class,
-                \App\Telegram\EventRequestHandler::class
+                \App\Telegram\EventRequestHandler::class,
+                \App\Telegram\QuestionRequestHandler::class,
+                \App\Telegram\QuestionCommand::class
             ],
         ],
 
