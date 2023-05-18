@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->bind('path.public', function() {
+            return base_path() . '/public';
+        });
         Auth::provider('self-eloquent', function ($app, $config) {
             return New \App\Libs\SelfEloquentUserProvider($app['hash'], $config['model']);
         });

@@ -1,7 +1,10 @@
-DirectoryIndex index.php
+#DirectoryIndex index.php
 
-RewriteEngine On 
-RewriteRule ^$ public/index.php [L]
-RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+#RewriteEngine On 
+#RewriteRule ^$ public/index.php [L]
+#RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
 
-php_value memory_limit 8000M
+#php_value memory_limit 8000M
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^(.*)$ public/$1 [L]
