@@ -41,12 +41,14 @@ class QuestionCommand extends CommandHandler
 
                 $text .= "$num. $question->text \n\n";
 
-                $num+=1;
+
 
                 $buttons[$line][] = [
                     'text'          => $num,
                     'callback_data' => '/request_question_' . $question->id
                 ];
+
+                $num+=1;
             }
 
             $inlineKb = [];
