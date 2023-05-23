@@ -22,3 +22,5 @@ package-lock.json
 /storage/app/public
 /public/js/**.*
 /public/images/**.*
+/nova
+/nova/**.*
